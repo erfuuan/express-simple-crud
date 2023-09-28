@@ -17,13 +17,12 @@ export default {
     findById: async (schema, dataId, populate) => {
         try {
             const dataSchema = Model[schema]
-            // const data = await dataSchema.findById(dataId)
-            const data = await dataSchema.findOne({ _id: dataId })
-
+            const data = await dataSchema.findById(dataId)
                 .populate(populate)
             // .lean();
             // data.createdAt = moment(data.createdAt, "X").format("jYYYY/jMM/jDD HH:mm")
             // data.updatedAt = moment(data.updatedAt, "X").format("jYYYY/jMM/jDD HH:mm")
+            console.log(data)
             if (data) {
                 return data
             } else { return undefined }
@@ -106,6 +105,19 @@ export default {
         try {
             const dataSchema = Model[schema]
             await dataSchema.findByIdAndUpdate(dataId, data)
+            return true
+        } catch (err) {
+            console.log(err)
+            console.log('err from @delete crudService zone')
+            throw err
+        }
+    },
+    hardDelete:async (schema, dataId, data) => {
+        try {
+            const dataSchema = Model[schema]
+            // await dataSchema.findByIdAndUpdate(dataId, data)
+            await dataSchema.findByIdAndDelete(dataId)
+
             return true
         } catch (err) {
             console.log(err)

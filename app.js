@@ -6,7 +6,10 @@ import chalk from 'chalk'
 import bodyParser from 'body-parser';
 import cors from 'cors'
 import apiRouter from './router/index.js'
+import dbConnection from './connection/db.connection.js'
 const app = express();
+
+await dbConnection()
 
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: false, limit: '10mb' }));

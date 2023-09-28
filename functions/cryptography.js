@@ -2,12 +2,12 @@ import jwt from 'jsonwebtoken';
 
 export default {
   generateAccessToken(username) {
-    return jwt.sign(username, appConfig.jwt.secret, { expiresIn: '2d' });
+    return jwt.sign(username, "12345678", { expiresIn: '2d' });
   },
 
   verifyJwtToken(token) {
-    // return jwt.verify(token:string, appConfig.jwt.secret)
-    jwt.verify(token, appConfig.jwt.secret, (err, data) => {
+    // return jwt.verify(token:string, "12345678")
+    jwt.verify(token, "12345678", (err, data) => {
       // console.log(new Date());
       if (!err) {
         return data.username.toString();
